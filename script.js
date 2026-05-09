@@ -5,8 +5,7 @@ const QUESTIONS = [
   "Qui ghoste le plus ? 👻",
   "Qui perd toujours son téléphone ? 📱",
   "Qui finirait en télé-réalité ? 📺",
-  "Qui ferait le pire karaoké ? 🎤",
-  "Qui pleure devant les films ? 🎬"
+  "Qui ferait le pire karaoké ? 🎤"
 ];
 
 const state = {
@@ -22,9 +21,8 @@ function savePlayers() {
 
 function loadPlayers() {
 
-  const saved = localStorage.getItem(
-    "queen_players"
-  );
+  const saved =
+    localStorage.getItem("queen_players");
 
   if (saved) {
     players = JSON.parse(saved);
@@ -36,7 +34,7 @@ function loadPlayers() {
 function avatar(player) {
 
   if (player.photo) {
-    return `<img src="${player.photo}">`;
+    return `<img src="${player.photo}" alt="">`;
   }
 
   return "👑";
@@ -46,7 +44,9 @@ function showScreen(id) {
 
   document
     .querySelectorAll(".screen")
-    .forEach(s => s.classList.remove("active"));
+    .forEach(screen => {
+      screen.classList.remove("active");
+    });
 
   document
     .getElementById(id)
@@ -55,15 +55,15 @@ function showScreen(id) {
 
 function buildCards() {
 
-  const grid = document.getElementById(
-    "cards-grid"
-  );
+  const grid =
+    document.getElementById("cards-grid");
 
   grid.innerHTML = "";
 
   players.forEach((player, index) => {
 
-    const card = document.createElement("div");
+    const card =
+      document.createElement("div");
 
     card.className = "player-card";
 
@@ -94,13 +94,18 @@ function pickSecret() {
 function startGame() {
 
   if (players.length < 2) {
-    alert("Ajoute au moins 2 joueuses 👀");
+
+    alert(
+      "Ajoute au moins 2 joueuses 👀"
+    );
+
     return;
   }
 
   pickSecret();
 
-  const player = players[state.secretIndex];
+  const player =
+    players[state.secretIndex];
 
   document.getElementById(
     "secret-avatar"
@@ -124,7 +129,9 @@ function randomQuestion() {
 
   const q =
     QUESTIONS[
-      Math.floor(Math.random() * QUESTIONS.length)
+      Math.floor(
+        Math.random() * QUESTIONS.length
+      )
     ];
 
   document.getElementById(
@@ -134,15 +141,15 @@ function randomQuestion() {
 
 function openGuessModal() {
 
-  const grid = document.getElementById(
-    "guess-grid"
-  );
+  const grid =
+    document.getElementById("guess-grid");
 
   grid.innerHTML = "";
 
   players.forEach((player, index) => {
 
-    const item = document.createElement("div");
+    const item =
+      document.createElement("div");
 
     item.className = "guess-item";
 
@@ -227,7 +234,8 @@ function renderPlayers() {
 
   players.forEach((player, index) => {
 
-    const card = document.createElement("div");
+    const card =
+      document.createElement("div");
 
     card.className = "manage-card";
 
@@ -257,27 +265,31 @@ function renderPlayers() {
       openEdit(index);
     });
 
-    card
-      .querySelector(".delete-btn")
-      .addEventListener("click", (e) => {
+    const deleteBtn =
+      card.querySelector(".delete-btn");
+
+    deleteBtn.addEventListener(
+      "click",
+      (e) => {
 
         e.stopPropagation();
 
-        if (
+        const confirmDelete =
           confirm(
             `Supprimer ${player.name} ?`
-          )
-        ) {
+          );
 
-          players.splice(index, 1);
+        if (!confirmDelete) return;
 
-          savePlayers();
+        players.splice(index, 1);
 
-          renderPlayers();
+        savePlayers();
 
-          showToast("Supprimée 🗑️");
-        }
-      });
+        renderPlayers();
+
+        showToast("Supprimée 🗑️");
+      }
+    );
 
     list.appendChild(card);
   });
@@ -324,8 +336,7 @@ function openEdit(index) {
 
   document.getElementById(
     "form-title"
-  ).textContent =
-    "Modifier";
+  ).textContent = "Modifier";
 
   document.getElementById(
     "input-name"
@@ -333,7 +344,7 @@ function openEdit(index) {
 
   document.getElementById(
     "input-anecdote"
-  ).value = player.anecdote;
+  ).value = player.anecdote || "";
 
   document.getElementById(
     "photo-preview"
@@ -369,7 +380,9 @@ function savePlayer() {
       .trim();
 
   if (!name) {
+
     alert("Ajoute un prénom 👀");
+
     return;
   }
 
@@ -394,7 +407,7 @@ function savePlayer() {
 
   closeForm();
 
-  showToast("Sauvegardé ✅");
+  showToast("Sauvegardée ✅");
 }
 
 document.addEventListener(
@@ -416,14 +429,18 @@ document.addEventListener(
       .getElementById("btn-secret-ok")
       .addEventListener(
         "click",
-        () => showScreen("screen-game")
+        () => {
+          showScreen("screen-game");
+        }
       );
 
     document
       .getElementById("btn-home")
       .addEventListener(
         "click",
-        () => showScreen("screen-home")
+        () => {
+          showScreen("screen-home");
+        }
       );
 
     document
@@ -513,10 +530,10 @@ document.addEventListener(
           const reader =
             new FileReader();
 
-          reader.onload = (ev) => {
+          reader.onload = (event) => {
 
             currentPhoto =
-              ev.target.result;
+              event.target.result;
 
             document.getElementById(
               "photo-preview"
@@ -532,14 +549,18 @@ document.addEventListener(
       .getElementById("btn-replay")
       .addEventListener(
         "click",
-        () => showScreen("screen-home")
+        () => {
+          showScreen("screen-home");
+        }
       );
 
     document
       .getElementById("btn-replay2")
       .addEventListener(
         "click",
-        () => showScreen("screen-home")
+        () => {
+          showScreen("screen-home");
+        }
       );
   }
 );
