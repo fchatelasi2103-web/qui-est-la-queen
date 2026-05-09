@@ -14,13 +14,13 @@
    ================================================ */
 const PLAYERS = [
   {
-    name: "Léa",
+    name: "Lise",
     emoji: "💅",
     photo: null,
     anecdote: "A déjà commandé un kebab à 3h du mat pour tout le groupe."
   },
   {
-    name: "Camille",
+    name: "Clotilde",
     emoji: "🍷",
     photo: null,
     anecdote: "Connaît le barman de chaque bar du quartier par son prénom."
