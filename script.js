@@ -475,3 +475,57 @@ function init() {
 }
 
 document.addEventListener('DOMContentLoaded', init);
+/* =============================================
+   GESTION JOUEUSES
+============================================= */
+
+.players-modal-box {
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow: hidden;
+  background: rgba(22,18,46,.95);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 28px;
+  padding: 20px;
+  position: relative;
+}
+
+.players-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.players-header h2 {
+  font-family: var(--font-head);
+  font-size: 28px;
+}
+
+.players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  max-height: 65vh;
+  padding-right: 6px;
+}
+
+.player-manage-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  position: relative;
+  overflow: hidden;
+  transition: .25s ease;
+  animation: playerAppear .3s ease;
+}
+
+.player-manage-card:hover {
+}
